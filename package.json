@@ -1,1 +1,19 @@
-{"name":"sanaa","version":"1.0.0","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"start":"node server.mjs","test":"node --test","build":"node scripts/build.mjs","verify":"node --test && node scripts/build.mjs"}}
+{
+  "name": "sanaa",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test",
+    "build": "node scripts/build.mjs",
+    "verify": "node --test && node scripts/build.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faisald2926/sanaa.git"
+  }
+}

@@ -184,3 +184,9 @@ flowchart RTL
 ![واجهة الجوال](docs/screenshots/final-mobile.png)
 
 تحقق المنسق من 20 اختبارًا ناجحًا دون احتساب نسخ dist، ومن رحلة المتصفح والتصدير والعرض بعرض 390px دون أخطاء JavaScript أو تجاوز أفقي. الأدلة في `docs/coordinator-final-tests.txt` و`docs/coordinator-browser-qa.json`. حالات التجربة مؤلفة ولا تمثل أثرًا اجتماعيًا مقاسًا.
+
+## مستودع GitHub
+
+[مستودع صنعة](https://github.com/faisald2926/sanaa)
+
+الرابط مقدم من المشارك؛ وجود المستودع لا يعني نشر خادم الموقع.
