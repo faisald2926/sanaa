@@ -73,3 +73,12 @@ test('reserved object keys cannot become step identifiers; invalid payloads leav
  for(const id of ['__proto__','constructor','prototype'])assert.throws(()=>validateGuide({...fixture(),steps:[{id,title:'عنوان',instructions:'شرح',dependsOn:[]}]}));
  const {w,t}=setup(),before=w.serialize();assert.throws(()=>w.act(t,'edit',null),{status:400});assert.deepEqual(w.serialize(),before);
 });
+for(const action of ['new','import'])test(`${action} of identical content rejects prior trial hashes and both prior role confirmations`,()=>{
+ const {w,t,l}=setup();complete(w,l);const old=w.view(l);w.act(t,'confirm',{digest:old.digest});w.act(l,'confirm',{digest:old.digest});assert.equal(w.view(l).tested,true);
+ w.act(t,action,{guide:old.guide});if(action==='import')w.act(t,'approve',{});
+ const fresh=w.view(l);assert.deepEqual(fresh.trial.completed,{});
+ for(const s of old.guide.steps)assert.throws(()=>w.act(l,'complete',{id:s.id,hash:s.hash,result:'إقرار من الجولة السابقة'}),{status:409});
+ assert.notEqual(fresh.guide.instanceId,old.guide.instanceId);assert.notEqual(fresh.digest,old.digest);
+ complete(w,l);for(const key of [t,l])assert.throws(()=>w.act(key,'confirm',{digest:old.digest}),{status:409});assert.equal(w.view(l).tested,false);
+ const current=w.view(l).digest;w.act(t,'confirm',{digest:current});w.act(l,'confirm',{digest:current});assert.equal(w.view(l).tested,true);
+});

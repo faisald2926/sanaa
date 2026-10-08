@@ -1,0 +1,60 @@
+✔ validates DAG references, cycles, duplicate IDs and maximum twelve steps (2.8154ms)
+✔ prerequisites and authorizations prevent false work and role impersonation (1.8565ms)
+✔ edit invalidates changed step and descendants but preserves an independent branch and history (3.6793ms)
+✔ dependency edits and title edits also invalidate current acknowledgments (1.6362ms)
+✔ blocked work requires a teacher clarification and a new learner attempt (0.9457ms)
+✔ final transfer needs all current steps and both distinct bearer roles, invalidated on any guide edit (1.1615ms)
+✔ export excludes credentials and imports reset all approvals (1.4236ms)
+✔ expired credential fails after persistence reload (0.3461ms)
+✔ independent reachability oracle: every forward DAG of four steps retains exactly unaffected confirmations (94.9498ms)
+✔ teacher receives invitation only: learner chooses secret once, never returned by teacher state or export (0.6912ms)
+✔ exact descendant acknowledgment replay fails after ancestor is changed and re-completed (1.1814ms)
+✔ reserved object keys cannot become step identifiers; invalid payloads leave state unchanged (0.5995ms)
+✖ new of identical content rejects prior trial hashes and both prior role confirmations (1.2813ms)
+✖ import of identical content rejects prior trial hashes and both prior role confirmations (0.8423ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 12
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 220.5388
+
+✖ failing tests:
+
+test at test\core.test.mjs:76:38
+✖ new of identical content rejects prior trial hashes and both prior role confirmations (1.2813ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:80:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { status: 409 },
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test\core.test.mjs:76:38
+✖ import of identical content rejects prior trial hashes and both prior role confirmations (0.8423ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:80:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { status: 409 },
+    operator: 'throws',
+    diff: 'simple'
+  }
