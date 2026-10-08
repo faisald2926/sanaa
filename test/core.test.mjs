@@ -3,6 +3,16 @@ import assert from 'node:assert/strict';
 import { validateGuide } from '../src/guide.mjs';
 import { Workspace } from '../src/trial.mjs';
 const fixture=()=>({title:'طيّ منشفة',skill:'تعلم عملي',tools:['منشفة'],steps:[{id:'a',title:'بسط',instructions:'ابسط المنشفة',dependsOn:[]},{id:'b',title:'طي',instructions:'اطو النصف',dependsOn:['a']},{id:'c',title:'تسوية',instructions:'سو الحافة',dependsOn:['b']},{id:'d',title:'مكان',instructions:'جهز مكانًا',dependsOn:[]}]});
+test('import approval is bound to the reviewed guide and revision',()=>{
+ const w=new Workspace(),keys=w.setup(fixture());
+ w.act(keys.teacher,'import',{guide:fixture()});const reviewed=w.digest();
+ w.act(keys.teacher,'import',{guide:{...fixture(),title:'دليل مختلف'}});
+ assert.throws(()=>w.act(keys.teacher,'approve',{digest:reviewed}),{status:409});
+ assert.equal(w.view(keys.teacher).guide.approved,false);
+ const current=w.digest();w.act(keys.teacher,'edit',{id:'a',patch:{instructions:'شرح أحدث'}});
+ assert.throws(()=>w.act(keys.teacher,'approve',{digest:current}),{status:409});
+ w.act(keys.teacher,'approve',{digest:w.digest()});assert.equal(w.view(keys.teacher).guide.approved,true);
+});
 function setup(){const w=new Workspace();const keys=w.setup(fixture());const joined=w.join(keys.invitation,'learner-secret-at-least-twelve');return {w,t:keys.teacher,l:joined.learner};}
 function complete(w,l){for(const s of w.view(l).guide.steps)w.act(l,'complete',{id:s.id,hash:s.hash,result:'نفذتها فعلًا'});}
 test('validates DAG references, cycles, duplicate IDs and maximum twelve steps',()=>{
@@ -39,7 +49,7 @@ test('export excludes credentials and imports reset all approvals',()=>{
  const {w,t,l}=setup();complete(w,l);const digest=w.view(t).digest;w.act(t,'confirm',{digest});w.act(l,'confirm',{digest});
  const out=w.export(t);const json=JSON.stringify(out);assert.ok(!json.includes(t)&&!json.includes(l)&&!json.includes('tokenHash'));
  w.act(t,'import',{guide:{...out.guide,approved:true,trial:{completed:{a:true}}}});assert.equal(w.view(l).guide.approved,false);assert.equal(w.view(l).tested,false);assert.deepEqual(w.view(l).trial.completed,{});assert.throws(()=>complete(w,l));
- w.act(t,'approve',{});complete(w,l);assert.equal(w.view(l).tested,false);
+ w.act(t,'approve',{digest:w.digest()});complete(w,l);assert.equal(w.view(l).tested,false);
 });
 test('expired credential fails after persistence reload',()=>{
  const {w,t}=setup();const persisted=w.serialize();persisted.credentials.teacher.expiresAt=0;const restored=new Workspace(persisted);assert.throws(()=>restored.view(t));
@@ -75,7 +85,7 @@ test('reserved object keys cannot become step identifiers; invalid payloads leav
 });
 for(const action of ['new','import'])test(`${action} of identical content rejects prior trial hashes and both prior role confirmations`,()=>{
  const {w,t,l}=setup();complete(w,l);const old=w.view(l);w.act(t,'confirm',{digest:old.digest});w.act(l,'confirm',{digest:old.digest});assert.equal(w.view(l).tested,true);
- w.act(t,action,{guide:old.guide});if(action==='import')w.act(t,'approve',{});
+ w.act(t,action,{guide:old.guide});if(action==='import')w.act(t,'approve',{digest:w.digest()});
  const fresh=w.view(l);assert.deepEqual(fresh.trial.completed,{});
  for(const s of old.guide.steps)assert.throws(()=>w.act(l,'complete',{id:s.id,hash:s.hash,result:'إقرار من الجولة السابقة'}),{status:409});
  assert.notEqual(fresh.guide.instanceId,old.guide.instanceId);assert.notEqual(fresh.digest,old.digest);

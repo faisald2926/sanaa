@@ -23,7 +23,7 @@ export class Workspace {
   need(teacher.includes(action)||learner.includes(action)||action==='confirm','عملية غير معروفة');need(!teacher.includes(action)||role==='teacher','صلاحية المعلّم مطلوبة',403);need(!learner.includes(action)||role==='learner','صلاحية المتعلّم مطلوبة',403);
   if(action==='edit')this.edit(payload.id,payload.patch);
   if(action==='new'||action==='import'){this.state.guide=versionGuide(payload.guide,action==='new');this.state.trial=emptyTrial();this.state.lastImpact=[];}
-  if(action==='approve'){g.approved=true;g.revision++;tr.confirmations={};}
+  if(action==='approve'){need(payload.digest===this.digest(),'تغير الدليل بعد المراجعة؛ حدّث الصفحة وراجع النسخة الحالية',409);g.approved=true;g.revision++;tr.confirmations={};}
   if(action==='complete'||action==='block'){
    need(g.approved,'يجب مراجعة الدليل واعتماده من المعلّم أولًا');const s=g.steps.find(s=>s.id===payload.id);need(s,'الخطوة غير موجودة');need(payload.hash===s.hash,'تغيرت نسخة الخطوة؛ حدّث الصفحة وجرب النسخة الحالية',409);
    need(s.dependsOn.every(id=>tr.completed[id]?.hash===g.steps.find(s=>s.id===id).hash),'أنجز المتطلبات السابقة أولًا',409);
@@ -39,5 +39,6 @@ export class Workspace {
   return this.view(token);
  }
  export(token){this.role(token);return {format:'sanaa-guide-v1',exportedAt:new Date().toISOString(),guide:structuredClone(this.state.guide),trial:structuredClone(this.state.trial),notice:'الإقرارات سجل ذاتي لا يثبت الهوية أو جودة المهارة. الاستيراد يعيدها إلى انتظار المراجعة.'};}
+ exportGuide(token){this.role(token);return {format:'sanaa-guide-v1',guide:validateGuide(this.state.guide),notice:'نسخة الدليل الحالي لإعادة الاستخدام، دون تاريخ النسخ أو إقرارات التجربة. الاستيراد يتطلب مراجعة جديدة.'};}
  serialize(){return structuredClone(this.state);}
 }

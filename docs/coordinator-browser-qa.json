@@ -1,16 +1,33 @@
 {
   "id": "sanaa",
-  "url": "http://127.0.0.1:62544",
+  "url": "http://127.0.0.1:59109",
+  "isolated": true,
+  "status": "pass",
   "steps": [
     {
       "step": "independent enrollment, authored block/clarification/trial/dual confirmation",
       "humanSkillTrial": false
     },
     {
-      "step": "actual JSON and printable HTML downloads"
+      "step": "separate compact guide, trial archive and printable HTML downloads",
+      "compactBytes": 2369,
+      "archiveBytes": 10800
+    },
+    {
+      "step": "compact guide imports through UI and resets completion, issues and approvals; learner waits for review"
+    },
+    {
+      "step": "teacher reviews current digest through UI; guide opens for fresh learner trial with no inherited confirmations"
     }
   ],
   "rtl": true,
   "mobileNoOverflow": true,
-  "pageErrors": []
+  "pageErrors": [],
+  "screenshots": {
+    "desktop": "sanaa-desktop.png",
+    "desktopFull": "sanaa-desktop-full.png",
+    "mobile": "sanaa-mobile.png",
+    "visibleCredentials": false,
+    "visibleErrors": false
+  }
 }

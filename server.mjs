@@ -1,7 +1,7 @@
 import {createServer}from'node:http';import {readFile}from'node:fs/promises';import {fileURLToPath}from'node:url';import {join,dirname,resolve}from'node:path';import {createHash}from'node:crypto';
 import {Workspace}from'./src/trial.mjs';import {need}from'./src/guide.mjs';import {load,createStore}from'./src/store.mjs';import {demo}from'./src/demo.mjs';import {generateDraft}from'./src/gemini.mjs';import {printable,printCSS}from'./src/print.mjs';
-const root=dirname(fileURLToPath(import.meta.url));const assets={'/':'index.html','/styles.css':'styles.css','/app.mjs':'app.mjs','/assets/fold.svg':'assets/fold.svg','/assets/transfer.svg':'assets/transfer.svg','/assets/branches.svg':'assets/branches.svg'};
-async function body(req){let chunks=[],size=0;for await(const chunk of req){size+=chunk.length;need(size<=65536,'الطلب أكبر من الحد المسموح',413);chunks.push(chunk);}try{return JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{need(false,'صيغة JSON غير صالحة');}}
+const root=dirname(fileURLToPath(import.meta.url));const assets={'/':'index.html','/styles.css':'styles.css','/app.mjs':'app.mjs','/import.mjs':'import.mjs','/assets/fold.svg':'assets/fold.svg','/assets/transfer.svg':'assets/transfer.svg','/assets/branches.svg':'assets/branches.svg'};
+async function body(req){let chunks=[],size=0;for await(const chunk of req){size+=chunk.length;need(size<=262144,'الطلب أكبر من ٢٥٦ كيلوبايت',413);chunks.push(chunk);}try{return JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{need(false,'صيغة JSON غير صالحة');}}
 export async function startServer({port=Number(process.env.PORT||4313),file=process.env.DATA_FILE||join(root,'data','state.json'),aiOptions}={}){
  let w=new Workspace(await load(file));const save=createStore(file);let server,mutations=Promise.resolve();
  const transact=operation=>{const result=mutations.then(async()=>{const candidate=new Workspace(w.serialize());const value=operation(candidate);await save(candidate.serialize());w=candidate;return value;});mutations=result.catch(()=>{});return result;};
@@ -18,6 +18,7 @@ export async function startServer({port=Number(process.env.PORT||4313),file=proc
    const token=req.headers.authorization?.startsWith('Bearer ')?req.headers.authorization.slice(7):undefined;const role=w.role(token);
    if(req.method==='GET'&&path==='/api/state'){json(200,w.view(token));return;}
    if(req.method==='GET'&&path==='/api/export'){json(200,w.export(token));return;}
+   if(req.method==='GET'&&path==='/api/export-guide'){json(200,w.exportGuide(token));return;}
    if(req.method==='GET'&&path==='/api/print'){const v=w.view(token);need(v.guide.approved,'الدليل يحتاج اعتماد المعلّم قبل طباعته',409);res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(printable(v));return;}
    if(req.method==='POST'&&path==='/api/action'){const data=await body(req);const v=await transact(candidate=>candidate.act(token,data.action,data.payload));json(200,v);return;}
    if(req.method==='POST'&&path==='/api/draft'){need(role==='teacher','صلاحية المعلّم مطلوبة',403);const data=await body(req);const draft=await generateDraft(data,aiOptions);json(200,{draft,published:false,requiresTeacherReview:true});return;}

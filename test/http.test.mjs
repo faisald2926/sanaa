@@ -1,6 +1,24 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {mkdtemp,rm,readFile,rename,mkdir} from 'node:fs/promises';import {tmpdir}from'node:os';import {join}from'node:path';import {createServer}from'node:http';
 import {startServer}from'../server.mjs';import {generateDraft}from'../src/gemini.mjs';
 const guide={title:'<img src=x onerror=alert(1)>',skill:'طي منشفة',tools:['منشفة'],steps:[{id:'a',title:'بسط',instructions:'افرد المنشفة',dependsOn:[]},{id:'b',title:'طي',instructions:'اطو النصف',dependsOn:['a']}]};
+test('large edited guide can round-trip and offers a compact export apart from the archive',async t=>{
+ const {req,keys:k}=await harness(t);
+ const large={title:'دليل عربي كامل',skill:'مهارة مؤلفة',tools:[],steps:Array.from({length:12},(_,i)=>({id:'s'+i,title:'خطوة '+i,instructions:'ع'.repeat(2000),dependsOn:[]}))};
+ assert.equal((await req('/api/action',{action:'new',payload:{guide:large}},k.teacher)).status,200);
+ for(let i=0;i<4;i++)assert.equal((await req('/api/action',{action:'edit',payload:{id:'s0',patch:{instructions:(i%2?'ب':'ت').repeat(2000)}}},k.teacher)).status,200);
+ const archive=JSON.parse((await req('/api/export',null,k.teacher)).body);
+ assert.ok(Buffer.byteLength(JSON.stringify(archive))>65536);
+ const imported=await req('/api/action',{action:'import',payload:{guide:archive.guide}},k.teacher);
+ assert.equal(imported.status,200);const view=JSON.parse(imported.body);assert.equal(view.guide.approved,false);
+ const portableResponse=await req('/api/export-guide',null,k.teacher);assert.equal(portableResponse.status,200);
+ const portable=JSON.parse(portableResponse.body);assert.ok(Buffer.byteLength(portableResponse.body)<65536);
+ assert.equal(portable.guide.steps[0].history,undefined);assert.equal(portable.trial,undefined);
+ assert.ok(!portableResponse.body.includes(k.teacher)&&!portableResponse.body.includes(k.learner));
+ const again=await req('/api/action',{action:'import',payload:{guide:portable.guide}},k.teacher);
+ assert.equal(again.status,200);assert.notEqual(JSON.parse(again.body).guide.instanceId,view.guide.instanceId);
+ const normalized=await import('../public/import.mjs');const normalizedGuide=normalized.guideForImport(archive);
+ assert.equal(normalizedGuide.steps[0].history,undefined);assert.deepEqual(normalizedGuide,portable.guide);
+});
 async function harness(t){const dir=await mkdtemp(join(tmpdir(),'sanaa-'));const app=await startServer({port:0,file:join(dir,'state.json')});t.after(async()=>{await app.close();await rm(dir,{recursive:true,force:true});});const url=app.url;async function req(path,body,token,origin=url){const res=await fetch(url+path,{method:body?'POST':'GET',headers:{...(body?{'Content-Type':'application/json',Origin:origin}:{}),...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined});return {status:res.status,body:await res.text()};}const r=await req('/api/setup',{guide});assert.equal(r.status,201);const keys=JSON.parse(r.body);assert.equal(keys.learner,undefined);const joined=await req('/api/join',{invitation:keys.invitation,secret:'learner-secret-for-local-test'});assert.equal(joined.status,201);keys.learner=JSON.parse(joined.body).learner;assert.equal((await req('/api/join',{invitation:keys.invitation,secret:'second-learner-long-secret'})).status,409);return {app,req,keys,dir};}
 test('actual HTTP lifecycle enforces role, current versions, prerequisite and two confirmations',async t=>{
  const {req,keys:k}=await harness(t);assert.equal((await req('/api/state')).status,401);assert.equal((await req('/api/action',{action:'edit',payload:{id:'a',patch:{title:'مزور'}}},k.learner)).status,403);
@@ -14,7 +32,7 @@ test('actual HTTP lifecycle enforces role, current versions, prerequisite and tw
 });
 test('HTTP checks origin, body size, malformed JSON, XSS-safe print, secret-free export and persistence',async t=>{
  const {app,req,keys:k,dir}=await harness(t);assert.equal((await req('/api/action',{action:'approve'},k.teacher,'https://evil.example')).status,403);
- assert.equal((await req('/api/setup',{guide})).status,409);assert.equal((await req('/api/action',{action:'edit',payload:{oversize:'x'.repeat(70000)}},k.teacher)).status,413);
+ assert.equal((await req('/api/setup',{guide})).status,409);assert.equal((await req('/api/action',{action:'edit',payload:{oversize:'x'.repeat(270000)}},k.teacher)).status,413);
  const malformed=await fetch(app.url+'/api/action',{method:'POST',headers:{Origin:app.url,Authorization:'Bearer '+k.teacher},body:'{bad'});assert.equal(malformed.status,400);
  const p=await req('/api/print',null,k.teacher);assert.equal(p.status,200);assert.ok(p.body.includes('&lt;img'));assert.ok(!p.body.includes('<img src=x'));assert.ok(!p.body.includes(k.teacher));
  const exp=await req('/api/export',null,k.teacher);assert.ok(!exp.body.includes(k.teacher)&&!exp.body.includes(k.learner));
