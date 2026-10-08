@@ -60,7 +60,7 @@ npm start
 ## المعمارية
 
 ```mermaid
-flowchart RTL
+flowchart RL
   Browser[واجهة عربية RTL] --> HTTP[خادم Node HTTP]
   HTTP --> Auth[صلاحيات bearer ودعوة أحادية]
   Auth --> Domain[محرك النسخ والتجربة]
@@ -70,7 +70,7 @@ flowchart RTL
 ```
 
 ```mermaid
-flowchart RTL
+flowchart RL
   Explain[المعلّم يشرح] --> Practice[المتعلّم ينفذ خارج الشاشة]
   Practice --> Outcome[يصف الناتج]
   Practice --> Block[يسجل سؤالًا عند التعثر]
@@ -127,7 +127,7 @@ flowchart LR
 ```
 
 ```mermaid
-flowchart RTL
+flowchart RL
   Notes[ملاحظات المعلّم] --> Consent{موافقة إرسال النص؟}
   Consent -->|نعم| API[Gemini مع مهلة ومخطط JSON]
   API --> Draft[مسودة غير منشورة]
