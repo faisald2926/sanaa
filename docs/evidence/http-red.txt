@@ -1,0 +1,40 @@
+✖ actual HTTP lifecycle enforces role, current versions, prerequisite and two confirmations (2.9773ms)
+✖ HTTP checks origin, body size, malformed JSON, XSS-safe print, secret-free export and persistence (1.945ms)
+✖ Gemini requires consent, timeout and schema validation; never publishes generated drafts (1.7175ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.8517
+
+✖ failing tests:
+
+test at test\http.test.mjs:5:1
+✖ actual HTTP lifecycle enforces role, current versions, prerequisite and two confirmations (2.9773ms)
+  Error: not implemented
+      at startServer (file:///C:/shamela/work/norah_final/projects/sanaa/server.mjs:1:43)
+      at harness (file:///C:/shamela/work/norah_final/projects/sanaa/test/http.test.mjs:4:92)
+      at async TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/http.test.mjs:6:21)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at test\http.test.mjs:15:1
+✖ HTTP checks origin, body size, malformed JSON, XSS-safe print, secret-free export and persistence (1.945ms)
+  Error: not implemented
+      at startServer (file:///C:/shamela/work/norah_final/projects/sanaa/server.mjs:1:43)
+      at harness (file:///C:/shamela/work/norah_final/projects/sanaa/test/http.test.mjs:4:92)
+      at async TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/http.test.mjs:16:29)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\http.test.mjs:24:1
+✖ Gemini requires consent, timeout and schema validation; never publishes generated drafts (1.7175ms)
+  Error: not implemented
+      at startServer (file:///C:/shamela/work/norah_final/projects/sanaa/server.mjs:1:43)
+      at harness (file:///C:/shamela/work/norah_final/projects/sanaa/test/http.test.mjs:4:92)
+      at async TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/http.test.mjs:25:21)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

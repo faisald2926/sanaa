@@ -1,0 +1,4 @@
+import {randomBytes, timingSafeEqual} from 'node:crypto';
+import {hash,need} from './guide.mjs';
+export function issueCredentials(){const teacher=randomBytes(32).toString('base64url'),invitation=randomBytes(32).toString('base64url');const expiresAt=Date.now()+30*24*60*60*1000;return {keys:{teacher,invitation},records:{teacher:{tokenHash:hash(teacher),expiresAt}},invitation:{tokenHash:hash(invitation),expiresAt:Date.now()+24*60*60*1000}};}
+export function authenticate(records,token){need(typeof token==='string'&&token.length<=200,'رمز الدخول غير صالح',401);const incoming=Buffer.from(hash(token));for(const role of ['teacher','learner']){const r=records?.[role];if(r&&r.expiresAt>Date.now()&&timingSafeEqual(incoming,Buffer.from(r.tokenHash)))return role;}need(false,'رمز الدخول غير صحيح أو منتهي',401);}

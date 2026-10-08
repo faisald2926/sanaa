@@ -1,0 +1,138 @@
+✔ validates DAG references, cycles, duplicate IDs and maximum twelve steps (2.4911ms)
+✖ prerequisites and authorizations prevent false work and role impersonation (1.1558ms)
+✖ edit invalidates changed step and descendants but preserves an independent branch and history (1.3544ms)
+✖ dependency edits and title edits also invalidate current acknowledgments (0.4256ms)
+✖ blocked work requires a teacher clarification and a new learner attempt (0.2659ms)
+✖ final transfer needs all current steps and both distinct bearer roles, invalidated on any guide edit (0.2632ms)
+✖ export excludes credentials and imports reset all approvals (0.3098ms)
+✖ expired credential fails after persistence reload (0.333ms)
+✖ independent reachability oracle: every forward DAG of four steps retains exactly unaffected confirmations (0.4413ms)
+✖ teacher receives invitation only: learner chooses secret once, never returned by teacher state or export (1.1017ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 1
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.1034
+
+✖ failing tests:
+
+test at test\core.test.mjs:12:1
+✖ prerequisites and authorizations prevent false work and role impersonation (1.1558ms)
+  TypeError: w.join is not a function
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:87)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:13:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at test\core.test.mjs:17:1
+✖ edit invalidates changed step and descendants but preserves an independent branch and history (1.3544ms)
+  TypeError: w.join is not a function
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:87)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:18:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:23:1
+✖ dependency edits and title edits also invalidate current acknowledgments (0.4256ms)
+  TypeError: w.join is not a function
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:87)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:24:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:27:1
+✖ blocked work requires a teacher clarification and a new learner attempt (0.2659ms)
+  TypeError: w.join is not a function
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:87)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:28:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:33:1
+✖ final transfer needs all current steps and both distinct bearer roles, invalidated on any guide edit (0.2632ms)
+  TypeError: w.join is not a function
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:87)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:34:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:38:1
+✖ export excludes credentials and imports reset all approvals (0.3098ms)
+  TypeError: w.join is not a function
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:87)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:39:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:44:1
+✖ expired credential fails after persistence reload (0.333ms)
+  TypeError: w.join is not a function
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:87)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:45:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:47:1
+✖ independent reachability oracle: every forward DAG of four steps retains exactly unaffected confirmations (0.4413ms)
+  TypeError: w.join is not a function
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:52:59)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:59:1
+✖ teacher receives invitation only: learner chooses secret once, never returned by teacher state or export (1.1017ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'gBWFOetHn-MHoZsJvGSHZBsoFA7wsH1CrtnMqo9r6lU'
+  - undefined
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:60:57)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'gBWFOetHn-MHoZsJvGSHZBsoFA7wsH1CrtnMqo9r6lU',
+    expected: undefined,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

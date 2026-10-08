@@ -1,0 +1,132 @@
+✖ validates DAG references, cycles, duplicate IDs and maximum twelve steps (0.9501ms)
+✖ prerequisites and authorizations prevent false work and role impersonation (0.7999ms)
+✖ edit invalidates changed step and descendants but preserves an independent branch and history (0.1446ms)
+✖ dependency edits and title edits also invalidate current acknowledgments (0.1322ms)
+✖ blocked work requires a teacher clarification and a new learner attempt (0.1408ms)
+✖ final transfer needs all current steps and both distinct bearer roles, invalidated on any guide edit (0.1143ms)
+✖ export excludes credentials and imports reset all approvals (0.1504ms)
+✖ expired credential fails after persistence reload (0.102ms)
+✖ independent reachability oracle: every forward DAG of four steps retains exactly unaffected confirmations (0.25ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 0
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 112.748
+
+✖ failing tests:
+
+test at test\core.test.mjs:8:1
+✖ validates DAG references, cycles, duplicate IDs and maximum twelve steps (0.9501ms)
+  Error: not implemented
+      at validateGuide (file:///C:/shamela/work/norah_final/projects/sanaa/src/guide.mjs:1:40)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:9:38)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at test\core.test.mjs:12:1
+✖ prerequisites and authorizations prevent false work and role impersonation (0.7999ms)
+  Error: not implemented
+      at new Workspace (file:///C:/shamela/work/norah_final/projects/sanaa/src/trial.mjs:1:47)
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:26)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:13:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at test\core.test.mjs:17:1
+✖ edit invalidates changed step and descendants but preserves an independent branch and history (0.1446ms)
+  Error: not implemented
+      at new Workspace (file:///C:/shamela/work/norah_final/projects/sanaa/src/trial.mjs:1:47)
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:26)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:18:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:23:1
+✖ dependency edits and title edits also invalidate current acknowledgments (0.1322ms)
+  Error: not implemented
+      at new Workspace (file:///C:/shamela/work/norah_final/projects/sanaa/src/trial.mjs:1:47)
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:26)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:24:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:27:1
+✖ blocked work requires a teacher clarification and a new learner attempt (0.1408ms)
+  Error: not implemented
+      at new Workspace (file:///C:/shamela/work/norah_final/projects/sanaa/src/trial.mjs:1:47)
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:26)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:28:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:33:1
+✖ final transfer needs all current steps and both distinct bearer roles, invalidated on any guide edit (0.1143ms)
+  Error: not implemented
+      at new Workspace (file:///C:/shamela/work/norah_final/projects/sanaa/src/trial.mjs:1:47)
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:26)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:34:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:38:1
+✖ export excludes credentials and imports reset all approvals (0.1504ms)
+  Error: not implemented
+      at new Workspace (file:///C:/shamela/work/norah_final/projects/sanaa/src/trial.mjs:1:47)
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:26)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:39:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:44:1
+✖ expired credential fails after persistence reload (0.102ms)
+  Error: not implemented
+      at new Workspace (file:///C:/shamela/work/norah_final/projects/sanaa/src/trial.mjs:1:47)
+      at setup (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:6:26)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:45:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test\core.test.mjs:47:1
+✖ independent reachability oracle: every forward DAG of four steps retains exactly unaffected confirmations (0.25ms)
+  Error: not implemented
+      at new Workspace (file:///C:/shamela/work/norah_final/projects/sanaa/src/trial.mjs:1:47)
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:52:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

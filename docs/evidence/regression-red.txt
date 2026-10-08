@@ -1,0 +1,129 @@
+✔ validates DAG references, cycles, duplicate IDs and maximum twelve steps (2.2478ms)
+✔ prerequisites and authorizations prevent false work and role impersonation (2.9517ms)
+✔ edit invalidates changed step and descendants but preserves an independent branch and history (2.8316ms)
+✔ dependency edits and title edits also invalidate current acknowledgments (1.206ms)
+✔ blocked work requires a teacher clarification and a new learner attempt (1.0146ms)
+✔ final transfer needs all current steps and both distinct bearer roles, invalidated on any guide edit (1.1581ms)
+✔ export excludes credentials and imports reset all approvals (1.3974ms)
+✔ expired credential fails after persistence reload (0.3242ms)
+✔ independent reachability oracle: every forward DAG of four steps retains exactly unaffected confirmations (104.779ms)
+✔ teacher receives invitation only: learner chooses secret once, never returned by teacher state or export (0.918ms)
+✖ exact descendant acknowledgment replay fails after ancestor is changed and re-completed (1.8194ms)
+✔ actual HTTP lifecycle enforces role, current versions, prerequisite and two confirmations (230.7116ms)
+✔ HTTP checks origin, body size, malformed JSON, XSS-safe print, secret-free export and persistence (139.533ms)
+✔ Gemini requires consent, timeout and schema validation; never publishes generated drafts (138.3298ms)
+✖ failed physical persistence does not publish mutation and does not poison the next write (76.701ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 13
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 718.4895
+
+✖ failing tests:
+
+test at test\core.test.mjs:65:1
+✖ exact descendant acknowledgment replay fails after ancestor is changed and re-completed (1.8194ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/core.test.mjs:69:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test\http.test.mjs:32:1
+✖ failed physical persistence does not publish mutation and does not poison the next write (76.701ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      allCompleted: false,
+  +   digest: 'd1b33ad5908284e276ec1a5255fc92678f638ce1c920ecaa4320f0e018cc6cd3',
+  -   digest: '7c6025ddf3f99ac4d901dddd9537b08e9abb49ab8cc27003a3bbdf8e02f90a5a',
+      guide: {
+        approved: true,
+  +     revision: 2,
+  -     revision: 1,
+        skill: 'طي منشفة',
+        steps: [
+          {
+            dependsOn: [],
+  +         hash: '76b03e494e9fec6d4efbea5098a5dba65e208d2e87a8799d6f6d77d2eaa1b9b4',
+  +         history: [
+  +           {
+  +             at: '2026-10-08T01:32:13.779Z',
+  +             dependsOn: [],
+  +             hash: '96f38093e0b25b12d1dfeab88cfefd6d47a4dca0add5e81a97e15ef3f72faf54',
+  +             instructions: 'افرد المنشفة',
+  +             title: 'بسط',
+  +             version: 1
+  +           }
+  +         ],
+  -         hash: '96f38093e0b25b12d1dfeab88cfefd6d47a4dca0add5e81a97e15ef3f72faf54',
+  -         history: [],
+            id: 'a',
+            instructions: 'افرد المنشفة',
+  +         title: 'لا يجب نشره',
+  +         version: 2
+  -         title: 'بسط',
+  -         version: 1
+          },
+          {
+            dependsOn: [
+              'a'
+            ],
+  ...
+      },
+  +   lastImpact: [
+  +     'a',
+  +     'b'
+  +   ],
+  -   lastImpact: [],
+      learnerJoined: true,
+      role: 'teacher',
+      tested: false,
+      trial: {
+        completed: {},
+        confirmations: {},
+  +     events: [
+  +       {
+  +         action: 'edit',
+  +         affected: [
+  +           'a',
+  +           'b'
+  +         ],
+  +         at: '2026-10-08T01:32:13.779Z',
+  +         revision: 2,
+  +         role: 'teacher',
+  +         stepId: 'a'
+  +       }
+  +     ],
+  -     events: [],
+        issues: [],
+        rounds: 0
+      }
+    }
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/sanaa/test/http.test.mjs:36:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { role: 'teacher', guide: { title: '<img src=x onerror=alert(1)>', skill: 'طي منشفة', tools: [Array], steps: [Array], approved: true, revision: 2 }, trial: { completed: {}, issues: [], confirmations: {}, events: [Array], rounds: 0 }, lastImpact: [ 'a', 'b' ], digest: 'd1b33ad5908284e276ec1a5255fc92678f638ce1c920ecaa4320f0e018cc6cd3', learnerJoined: true, allCompleted: false, tested: false },
+    expected: { role: 'teacher', guide: { title: '<img src=x onerror=alert(1)>', skill: 'طي منشفة', tools: [Array], steps: [Array], approved: true, revision: 1 }, trial: { completed: {}, issues: [], confirmations: {}, events: [], rounds: 0 }, lastImpact: [], digest: '7c6025ddf3f99ac4d901dddd9537b08e9abb49ab8cc27003a3bbdf8e02f90a5a', learnerJoined: true, allCompleted: false, tested: false },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
