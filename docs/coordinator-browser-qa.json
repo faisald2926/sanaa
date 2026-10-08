@@ -1,0 +1,16 @@
+{
+  "id": "sanaa",
+  "url": "http://127.0.0.1:62544",
+  "steps": [
+    {
+      "step": "independent enrollment, authored block/clarification/trial/dual confirmation",
+      "humanSkillTrial": false
+    },
+    {
+      "step": "actual JSON and printable HTML downloads"
+    }
+  ],
+  "rtl": true,
+  "mobileNoOverflow": true,
+  "pageErrors": []
+}

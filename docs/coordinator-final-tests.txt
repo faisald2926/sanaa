@@ -1,0 +1,26 @@
+✔ validates DAG references, cycles, duplicate IDs and maximum twelve steps (2.0434ms)
+✔ prerequisites and authorizations prevent false work and role impersonation (2.5159ms)
+✔ edit invalidates changed step and descendants but preserves an independent branch and history (2.5954ms)
+✔ dependency edits and title edits also invalidate current acknowledgments (1.2631ms)
+✔ blocked work requires a teacher clarification and a new learner attempt (0.9518ms)
+✔ final transfer needs all current steps and both distinct bearer roles, invalidated on any guide edit (1.0978ms)
+✔ export excludes credentials and imports reset all approvals (1.4528ms)
+✔ expired credential fails after persistence reload (0.3501ms)
+✔ independent reachability oracle: every forward DAG of four steps retains exactly unaffected confirmations (101.6212ms)
+✔ teacher receives invitation only: learner chooses secret once, never returned by teacher state or export (0.733ms)
+✔ exact descendant acknowledgment replay fails after ancestor is changed and re-completed (0.9265ms)
+✔ reserved object keys cannot become step identifiers; invalid payloads leave state unchanged (0.5772ms)
+✔ new of identical content rejects prior trial hashes and both prior role confirmations (1.962ms)
+✔ import of identical content rejects prior trial hashes and both prior role confirmations (1.6708ms)
+✔ actual HTTP lifecycle enforces role, current versions, prerequisite and two confirmations (203.6149ms)
+✔ HTTP checks origin, body size, malformed JSON, XSS-safe print, secret-free export and persistence (109.7277ms)
+✔ Gemini requires consent, timeout and schema validation; never publishes generated drafts (121.679ms)
+✔ failed physical persistence does not publish mutation and does not poison the next write (98.9722ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 670.0051
